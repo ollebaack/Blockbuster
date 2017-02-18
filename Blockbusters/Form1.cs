@@ -25,7 +25,6 @@ namespace Blockbusters
             point = 0;
             timer1.Enabled = true;
             gameover_lbl.Visible = false;
-            
         }
 
         public Form1()
@@ -48,7 +47,7 @@ namespace Blockbusters
         {
             racket.Left = Cursor.Position.X - (racket.Width / 2);           //Set the center of the racket to the position of the cursor
 
-            ball.Left += speed_left;
+            ball.Left += speed_left;            //Move the ball
             ball.Top += speed_top;
 
             score_lbl.Text = ("score: " + point);
@@ -72,7 +71,7 @@ namespace Blockbusters
 
             //}
 
-            if (ball.Left <= Playground.Left)
+            if (ball.Left >= Playground.Left)           //Bounce from walls
             {
                 speed_left = -speed_left;
             }
