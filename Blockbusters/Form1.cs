@@ -7,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace Blockbusters
 {
     public partial class Form1 : Form
     {
+        
+
         public int speed_left = 4;  //Speed for ball
         public int speed_top = 4;
         public int point = 0;       //Score points   
@@ -27,6 +28,8 @@ namespace Blockbusters
             gameover_lbl.Visible = false;
         }
 
+
+
         public Form1()
         {
             InitializeComponent();
@@ -36,16 +39,24 @@ namespace Blockbusters
             this.FormBorderStyle = FormBorderStyle.None;    //Remove any border
             this.TopMost = true;                            //Bring the form to front
             this.Bounds = Screen.PrimaryScreen.Bounds;      //Make it fullscreen
+            racket_left.BringToFront(); 
 
+           
             racket.Top = Playground.Bottom - (Playground.Bottom / 10);     //Sets position for racket
-            ball.Top = 50;                                                 //Sets position for ball
-            ball.Left = 50;
+            racket_left.Top = Playground.Bottom - (Playground.Bottom / 10);
+            racket_right.Top = Playground.Bottom - (Playground.Bottom / 10);
+            ball.Top = 10;                                                 //Sets position for ball
+            ball.Left = 100;
+
+
 
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             racket.Left = Cursor.Position.X - (racket.Width / 2);           //Set the center of the racket to the position of the cursor
+            racket_left.Left = Cursor.Position.X - (racket.Width/ 2);      //Set the left and right of the racket to the position of the cursor
+            racket_right.Left = Cursor.Position.X + (racket.Width /4 );
 
             ball.Left += speed_left;            //Move the ball
             ball.Top += speed_top;
@@ -58,18 +69,25 @@ namespace Blockbusters
             //if (ball.Bottom >= racket.Top && ball.Bottom <= racket.Bottom && ball.Left >= racket.Left && ball.Right <= racket.Right) //racket collision
             if (ball.Bounds.IntersectsWith(racket.Bounds))
             {
-                //speed_top += 2;
-                //speed_left += 2;
+                //speed_top += 1;
+                //speed_left += 1;
                 speed_top = -speed_top; //Change direction
                 point += 1;
             }
 
-            //if (ball.Bounds.IntersectsWith(racket)))  //Make it bounce differently depending on where it landed on the racket
-            //{
-            //    speed_left = ball
+            if (ball.Bounds.IntersectsWith(racket_left.Bounds) && speed_left >= 0)  //Make it bounce differently depending on where it landed on the racket
+            {
 
+                speed_left = -speed_left;
 
-            //}
+            }
+
+            if (ball.Bounds.IntersectsWith(racket_right.Bounds) && speed_left <= 0)  //Make it bounce differently depending on where it landed on the racket
+            {
+
+                speed_left = -speed_left;
+
+            }
 
             if (ball.Left >= Playground.Left)           //Bounce from walls
             {
@@ -96,8 +114,8 @@ namespace Blockbusters
         {
             if (e.KeyCode == Keys.Escape) { this.Close(); } //Close program with ESC button
             if (e.KeyCode == Keys.F1) { gameStart(); }      //Reload game
+            if (e.KeyCode == Keys.F3) { timer1.Enabled = false; }   //For debugging
                 
         }
-
     }
 }
