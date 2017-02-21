@@ -16,6 +16,7 @@ namespace Blockbusters
         public int speed_left = 4;  //Speed for ball
         public int speed_top = 4;
         public int point = 0;       //Score points   
+        private List<PictureBox> Lvl1 = new List<PictureBox>();
 
         public void gameStart()
         {
@@ -48,7 +49,26 @@ namespace Blockbusters
             ball.Top = 10;                                                 //Sets position for ball
             ball.Left = 100;
 
-
+            Lvl1.Add(block1);
+            Lvl1.Add(block2);
+            Lvl1.Add(block3);
+            Lvl1.Add(block4);
+            Lvl1.Add(block5);
+            Lvl1.Add(block6);
+            Lvl1.Add(block7);
+            Lvl1.Add(block8);
+            Lvl1.Add(block9);
+            Lvl1.Add(block10);
+            Lvl1.Add(block11);
+            Lvl1.Add(block12);
+            Lvl1.Add(block13);
+            Lvl1.Add(block14);
+            Lvl1.Add(block15);
+            Lvl1.Add(block16);
+            Lvl1.Add(block17);
+            Lvl1.Add(block18);
+            Lvl1.Add(block19);
+            Lvl1.Add(block20);
 
         }
 
